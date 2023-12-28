@@ -1,5 +1,5 @@
 -- predebug = true
--- always_enable_log = true
+always_enable_log = true
 -- test_fight = true
 -- fake_fight = true
 -- prefer_bapp = true
@@ -9,7 +9,7 @@
 -- disable_dorm_shift=true
 -- disable_manu_shift=true
 -- disable_overview_shift=true
--- disable_hotupdate = true
+disable_hotupdate = true
 -- disable_root_mode = true
 -- no_background_after_run = true
 -- fake_recruit = true
@@ -180,7 +180,7 @@ elseif not crontab_enable_only and (not extra_mode and true or extra_mode_multi)
         end
 
         -- 无密码切号方案
-        if new_change_account_plan and root_mode then 
+        if new_change_account_plan and root_mode then
             log("切号测试")
             _G.快速切号功能状态 = false
             closeapp(appid)
@@ -191,7 +191,7 @@ elseif not crontab_enable_only and (not extra_mode and true or extra_mode_multi)
                     user_token = decodeBase64(user_token)
                     _G.快速切号功能状态 = official_set_login_user(user_token)
                 end
-            elseif server ~=0 and read_local_config("account", username .. "biliautologin") then
+            elseif server ~= 0 and read_local_config("account", username .. "biliautologin") then
                 local userid = read_local_config("account", username .. "userid")
                 if userid and #userid > 1 and bilibili_is_uid_exist(userid) then
                     log("b服快速登录")
@@ -202,10 +202,10 @@ elseif not crontab_enable_only and (not extra_mode and true or extra_mode_multi)
         end
 
         if 快速切号功能状态 == false then
-            table.insert(job,"账户数据保存")
+            table.insert(job, "账户数据保存")
         end
 
-        if #username > 0 and #password > 0 and _G.快速切号功能状态 ~=true then
+        if #username > 0 and #password > 0 and _G.快速切号功能状态 ~= true then
             table.insert(job, 1, "退出账号")
         end
 
@@ -228,7 +228,7 @@ elseif not crontab_enable_only and (not extra_mode and true or extra_mode_multi)
         if not isweekday() and table.includes(multi_account_choice_weekday_only, i) then
             skip_account = true
         end
-		log(job)
+        log(job)
         if not skip_account then run(job) end
     end
     saveConfig("continue_account", '')
